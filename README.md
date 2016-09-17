@@ -1,2 +1,1 @@
-# TootPayRfid
-Toot Pay RFID Module
+# Toot Pay RFID Module
