@@ -13,20 +13,20 @@ using System.Windows.Forms;
 
 namespace TootPayRfid
 {
-    delegate void IncommingDelegate(string text);
+    delegate void incommingDelegate(string text);
 
     public partial class TootCardSerial : Form
     {
-        IncommingDelegate incommingDelegate;
+        incommingDelegate _incommingDelegate;
         int dataSize = 44;
 
         public TootCardSerial()
         {
             InitializeComponent();
-            incommingDelegate = new IncommingDelegate(appendText);
+            _incommingDelegate = new incommingDelegate(appendChar);
         }
 
-        void appendText(string text)
+        void appendChar(string text)
         {
             string _text = this.dataTextBox.Text + text;
             this.dataTextBox.Text = _text;
@@ -41,7 +41,7 @@ namespace TootPayRfid
             incomming.Read(incommingBuffer, 0, incommingBytes);
 
             String tempString = new String(incommingBuffer);
-            this.BeginInvoke(incommingDelegate, tempString);
+            this.BeginInvoke(_incommingDelegate, tempString);
         }
 
         private void dataTextBox_TextChanged(object sender, EventArgs e)
