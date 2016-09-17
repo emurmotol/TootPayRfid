@@ -120,13 +120,20 @@ namespace TootPayRfid
                     {
                         logsRichTextBox.AppendText(string.Format("[{0}]: Port opened!", timestamp()));
                     }
+                    logsRichTextBox.AppendText(string.Format("\n[{0}]: Listening on port {1}...", timestamp(), rfidSerialPort.PortName));
                 }
             }
             catch (Exception ex)
             {
-                logsRichTextBox.AppendText(string.Format("\n[{0}]: Error! {1}", timestamp(), ex.Message));
+                if (newLine)
+                {
+                    logsRichTextBox.AppendText(string.Format("\n[{0}]: Error! {1}", timestamp(), ex.Message));
+                }
+                else
+                {
+                    logsRichTextBox.AppendText(string.Format("[{0}]: Error! {1}", timestamp(), ex.Message));
+                }
             }
-            logsRichTextBox.AppendText(string.Format("\n[{0}]: Listening on port {1}...", timestamp(), rfidSerialPort.PortName));
         }
 
         private void closePort()
